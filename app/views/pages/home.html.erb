@@ -1,2 +1,33 @@
 <h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<p>User list</p>
+<table style="width:100%">
+  <tr>
+    <th>email</th>
+    <th>first_name</th>
+    <th>last_name</th>
+    <th>avatar</th>
+    <th>city</th>
+    <th>mobile</th>
+    <th>Show/Edit</th>
+  </tr>
+  <% @all_users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <% if user.avatar.attached? %>
+        <td><%= image_tag user.avatar, style:"width:100px" %></td>
+      <% else %>
+        <td><%= image_tag ("https://via.placeholder.com/150") %></td>
+      <% end %>
+      <td><%= user.city %></td>
+      <td><%= user.mobile %></td>
+      <% if user == current_user %>
+        <td><%= link_to 'Show/Edit', edit_user_registration_path(current_user) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+
+
